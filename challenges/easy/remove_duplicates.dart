@@ -4,10 +4,10 @@ void main() {
 
 int removeDuplicates(List<int> nums) {
   nums.sort();
-  int? prev;
+  int prev = 0;
   List<int> returnList = [];
   for (int number in nums) {
-    if (prev != null) {
+    if (prev != 0) {
       if (prev != number) {
         if (!returnList.contains(number)) {
           returnList.add(number);
