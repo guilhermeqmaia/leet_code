@@ -12,8 +12,7 @@ double trimMean(List<int> arr) {
   for (int number in arr) {
     mean += number;
   }
-  mean = mean / arr.length;
-  return mean;
+  return mean / arr.length;
 }
 
 List<int> _list = [
