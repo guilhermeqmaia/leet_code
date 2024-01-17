@@ -1,33 +1,23 @@
+import 'dart:math';
+
 class Solution {
   int trap(List<int> height) {
     int trappedWater = 0;
-
+    int left = 0;
+    int right = height.length - 1;
     int maxLeft = height.first;
-    int currentMaxRightIndex = 2;
+    int maxRight = height.last;
 
-    for (int i = 0; i < height.length - 1; i++) {
-      if (i == 0) continue;
-      int right = i + 1;
-      int maxRight = height[right];
-      int target = height[i];
-
-      if (height[i - 1] > maxLeft) maxLeft = height[i - 1];
-
-      if (currentMaxRightIndex > right)
-        maxRight = height[currentMaxRightIndex];
-      else
-        while (right <= height.length - 1) {
-          int rightContender = height[right];
-          if (rightContender > maxRight) {
-            maxRight = rightContender;
-            currentMaxRightIndex = right;
-          }
-          right++;
-        }
-
-      int minor = maxRight > maxLeft ? maxLeft : maxRight;
-
-      if (target < minor) trappedWater += minor - target;
+    while (left < right) {
+      if (maxLeft < maxRight) {
+        left++;
+        maxLeft = max(maxLeft, height[left]);
+        trappedWater += maxLeft - height[left];
+      } else {
+        right--;
+        maxRight = max(maxRight, height[right]);
+        trappedWater += maxRight - height[right];
+      }
     }
 
     return trappedWater;
